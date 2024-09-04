@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/Selamat', function () {
@@ -32,16 +34,16 @@ Route::get('/user/profile', function () {
     //
 })->name ('profile');
 
-Route::get(
+/* Route::get(
     '/user/profile',
     [UserProfileController::class, 'show']
 )->name('profile');
-
+ */
 //Generating URLs
-$url = route('profile');
+//UserProfileController$url = route('profile');
 
 // Generating Redirects...
-return redirect()->route('profile');
+//return redirect()->route('profile');
 
 Route::middleware(['first', 'second'])->group (function () {
   Route::get('/', function () {
@@ -58,19 +60,37 @@ Route::domain('{account}.example.com')->group(function (){
    });
 });
 
-Route::middleware ('auth') -> group(function () {
+/* Route::middleware ('auth') -> group(function () {
     Route::get('/user', [UserController::class, 'index']);
     Route::get('/post', [UserController::class, 'index']);
     Route::get('/event', [UserController::class, 'index']);
-});
+}); */
 
-Route::prefix('admin') ->group(function () {
+/* Route::prefix('admin') ->group(function () {
     Route::get('/user', [UserController::class, 'index']);
     Route::get('/post', [UserController::class, 'index']);
     Route::get('/event', [UserController::class, 'index']);
-});
+}); */
 
 Route::redirect ('/here','/there');
 
 Route::view('/welcome','welcome');
 Route::view('/welcome','welcome', ['name' => 'Taylor']);
+
+Route::get('/hello', [WelcomeController::class,'hello']);
+
+Route::get('/welcome', [PageController::class, 'index']);
+
+Route::get('/welcome', [PageController::class, 'index']);
+Route::get('/about', [PageController::class, 'about']);
+
+Route::get('/welcome', [PageController::class, 'index']);
+
+
+Route::get('/welcome', [PageController::class, 'index']);
+Route::get('/about', [PageController::class, 'about']);
+Route::get('/articles/{id}', [PageController::class, 'articles']);
+
+use App\Http\Controllers\photoController;
+
+Route::resource('photos', photoController::class);
